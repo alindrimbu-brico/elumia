@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Elumia — Ghid pentru planul nevăzut · Guide to the Unseen Plane</title>
+<meta name="description" content="Elumia — an interactive guide to the unseen plane. Discover which of your 7 inner Guardians drains your light, map your mind, and talk to the Operator. Bilingual (EN/RO), free. · Ghid interactiv pentru planul nevăzut." />
+<meta name="keywords" content="Elumia, unseen plane, demonology, psychology, archetypes, self-knowledge, inner guardians, mindfulness, shadow work, quiz, planul nevăzut, demonologie, cunoaștere de sine" />
+<meta name="author" content="Elumia" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#fbf7ef" />
+<link rel="canonical" href="https://elumia.app/" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141a2e'/%3E%3Cpath d='M32 7 L36 28 L57 32 L36 36 L32 57 L28 36 L7 32 L28 28 Z' fill='%23f6e4b0'/%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" href="https://elumia.app/apple-touch-icon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Elumia" />
+<meta property="og:title" content="Elumia — Guide to the Unseen Plane" />
+<meta property="og:description" content="Discover where your light leaks. Map your 7 inner Guardians, talk to the Operator, keep a vigil journal. Bilingual, free." />
+<meta property="og:url" content="https://elumia.app/" />
+<meta property="og:image" content="https://elumia.app/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="ro_RO" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Elumia — Guide to the Unseen Plane" />
+<meta name="twitter:description" content="Map your 7 inner Guardians and talk to the Operator. Bilingual, free." />
+<meta name="twitter:image" content="https://elumia.app/og-image.png" />
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://elumia.app/#website","url":"https://elumia.app/","name":"Elumia","inLanguage":["ro","en"],"description":"An interactive guide to the unseen plane: map your 7 inner Guardians, talk to the Operator, keep a vigil journal."},{"@type":"SoftwareApplication","name":"Elumia","operatingSystem":"ANDROID","applicationCategory":"LifestyleApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"installUrl":"https://play.google.com/store/apps/details?id=app.elumia","description":"Discover where your light leaks. Map your inner Guardians, talk to the Operator, keep a vigil journal. Bilingual (EN/RO)."}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#fbf7ef;            /* fildeș cald */
+    --bg-2:#f4ecdd;
+    --ink:#2b2a26;           /* text principal */
+    --ink-soft:#6a655a;
+    --gold:#c79a3e;          /* auriu luminos */
+    --gold-deep:#a97f27;
+    --night:#141a2e;         /* albastru-noapte, planul nevăzut */
+    --night-soft:#26304f;
+    --line:rgba(43,42,38,.12);
+    --card:rgba(255,255,255,.62);
+    --shadow:0 20px 60px -30px rgba(60,45,10,.45);
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Manrope',system-ui,sans-serif;
+    --maxw:760px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* fundal de lumină */
+  #light{position:fixed;inset:0;z-index:-2;pointer-events:none}
+  .aura{
+    position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(60vw 60vw at 78% -10%, rgba(199,154,62,.20), transparent 60%),
+      radial-gradient(50vw 50vw at 8% 12%, rgba(255,240,200,.35), transparent 55%),
+      radial-gradient(70vw 70vw at 50% 120%, rgba(199,154,62,.10), transparent 60%);
+  }
+  /* bara de progres */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--gold),var(--gold-deep));z-index:100;
+    box-shadow:0 0 18px rgba(199,154,62,.8)}
+  /* cuprins lateral */
+  nav.toc{
+    position:fixed;top:50%;left:26px;transform:translateY(-50%);
+    z-index:50;display:flex;flex-direction:column;gap:14px;
+  }
+  nav.toc a{
+    position:relative;width:11px;height:11px;border-radius:50%;
+    border:1.5px solid var(--gold-deep);background:transparent;
+    transition:.35s;display:block;text-decoration:none;
+  }
+  nav.toc a::after{
+    content:attr(data-label);position:absolute;left:22px;top:50%;
+    transform:translateY(-50%);white-space:nowrap;font-size:12px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);
+    opacity:0;transition:.3s;pointer-events:none;font-weight:600;
+  }
+  nav.toc a:hover::after{opacity:1}
+  nav.toc a.active{background:var(--gold);box-shadow:0 0 14px var(--gold);transform:scale(1.25)}
+  @media(max-width:1080px){nav.toc{display:none}}
+
+  /* structură */
+  section{padding:96px 24px;position:relative}
+  .wrap{max-width:var(--maxw);margin:0 auto}
+  .kicker{font-size:12px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:700;margin-bottom:18px}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.12;letter-spacing:-.01em}
+  h2{font-size:clamp(30px,5vw,46px);margin-bottom:22px}
+  h3{font-size:clamp(22px,3vw,28px);margin:34px 0 12px}
+  p{margin-bottom:18px;font-size:18px;color:var(--ink)}
+  p.lead{font-size:21px;color:var(--ink-soft)}
+  em{color:var(--gold-deep);font-style:italic}
+  strong{font-weight:700}
+  blockquote{
+    font-family:var(--serif);font-size:clamp(24px,3.4vw,32px);
+    line-height:1.28;color:var(--night);margin:38px 0;padding-left:26px;
+    border-left:2px solid var(--gold);font-style:italic;
+  }
+  .reveal{opacity:0;transform:translateY(28px);transition:.9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* COPERTĂ */
+  #cover{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    align-items:center;text-align:center;padding:24px}
+  #cover .halo{
+    width:150px;height:150px;border-radius:50%;margin-bottom:36px;position:relative;
+    background:radial-gradient(circle at 50% 45%,#fff8e6,var(--gold) 55%,transparent 72%);
+    box-shadow:0 0 90px 20px rgba(199,154,62,.5);animation:breathe 6s ease-in-out infinite;
+  }
+  @keyframes breathe{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.07);opacity:1}}
+  #cover h1{font-size:clamp(58px,13vw,124px);letter-spacing:.16em;font-weight:500}
+  #cover .sub{font-family:var(--serif);font-style:italic;font-size:clamp(20px,3.4vw,28px);
+    color:var(--ink-soft);margin-top:10px}
+  #cover .meta{margin-top:34px;font-size:12px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:700}
+  .scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);
+    animation:float 2.4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translate(-50%,0);opacity:.6}50%{transform:translate(-50%,8px);opacity:1}}
+
+  /* carduri Străjeri */
+  .guardians{display:grid;gap:18px;margin-top:34px}
+  .g-card{background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:26px 26px 24px;backdrop-filter:blur(6px);box-shadow:var(--shadow);
+    transition:.4s;position:relative;overflow:hidden}
+  .g-card:hover{transform:translateY(-4px);border-color:rgba(199,154,62,.5)}
+  .g-card .num{position:absolute;top:-14px;right:6px;font-family:var(--serif);
+    font-size:96px;color:rgba(199,154,62,.14);font-weight:600}
+  .g-card h3{margin:0 0 4px;font-size:26px}
+  .g-card .role{font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:700;margin-bottom:12px}
+  .g-card .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .tag{font-size:12.5px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);
+    background:rgba(255,255,255,.5);color:var(--ink-soft)}
+  .tag.anti{border-color:rgba(199,154,62,.5);color:var(--gold-deep);
+    background:rgba(199,154,62,.08);font-weight:600}
+
+  /* strat / plan nevazut card */
+  .layers{display:grid;gap:16px;margin-top:30px}
+  .layer{border-radius:16px;padding:24px;color:#fff;position:relative;overflow:hidden}
+  .layer h3{margin:0 0 6px;color:#fff}
+  .layer p{color:rgba(255,255,255,.82);margin:0;font-size:16px}
+  .l1{background:linear-gradient(135deg,#3a2140,#5a2d3a)}
+  .l2{background:linear-gradient(135deg,#26304f,#3a4a72)}
+  .l3{background:linear-gradient(135deg,var(--gold-deep),#e6c46a);color:#241c05}
+  .l3 h3,.l3 p{color:#241c05}
+
+  /* liste elegante */
+  .clean{list-style:none;margin:14px 0 22px}
+  .clean li{padding:10px 0 10px 30px;position:relative;border-bottom:1px solid var(--line);font-size:17px}
+  .clean li::before{content:"";position:absolute;left:4px;top:19px;width:8px;height:8px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold)}
+  .clean li strong{color:var(--ink)}
+
+  /* panouri persuasiune */
+  .levers{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:26px}
+  .lever{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .lever h4{font-family:var(--serif);font-size:21px;margin-bottom:4px}
+  .lever small{color:var(--gold-deep);font-weight:600;letter-spacing:.04em}
+  .lever p{font-size:15px;color:var(--ink-soft);margin:8px 0 0}
+
+  .shield{background:var(--night);color:#fff;border-radius:20px;padding:34px;margin-top:30px}
+  .shield h3{color:#fff;margin-top:0}
+  .shield ol{list-style:none;counter-reset:s}
+  .shield li{counter-increment:s;padding:14px 0 14px 52px;position:relative;
+    border-top:1px solid rgba(255,255,255,.12);font-size:18px}
+  .shield li:first-child{border-top:0}
+  .shield li::before{content:counter(s);position:absolute;left:0;top:12px;width:34px;height:34px;
+    border-radius:50%;background:rgba(199,154,62,.2);color:var(--gold);display:grid;
+    place-items:center;font-family:var(--serif);font-size:20px;font-weight:600}
+
+  /* JOCUL */
+  #quiz-wrap{background:linear-gradient(160deg,#fffaf0,#f6ecd8);
+    border:1px solid rgba(199,154,62,.35);border-radius:24px;padding:34px;
+    box-shadow:var(--shadow);margin-top:34px}
+  .q-energy{height:10px;border-radius:999px;background:rgba(43,42,38,.1);overflow:hidden;margin-bottom:26px}
+  .q-energy i{display:block;height:100%;width:100%;
+    background:linear-gradient(90deg,var(--gold),#f2d98a);transition:width .5s}
+  .q-count{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);
+    font-weight:700;margin-bottom:12px}
+  .q-text{font-family:var(--serif);font-size:clamp(22px,3.4vw,28px);line-height:1.3;margin-bottom:22px}
+  .q-opts{display:grid;gap:12px}
+  .opt{text-align:left;background:rgba(255,255,255,.7);border:1px solid var(--line);
+    border-radius:14px;padding:16px 18px;font-family:var(--sans);font-size:16.5px;color:var(--ink);
+    cursor:pointer;transition:.25s;line-height:1.5}
+  .opt:hover{border-color:var(--gold);transform:translateX(4px);background:#fff}
+  .q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+  .btn{font-family:var(--sans);font-weight:600;font-size:14px;letter-spacing:.04em;
+    padding:11px 22px;border-radius:999px;border:1px solid var(--gold-deep);
+    background:transparent;color:var(--gold-deep);cursor:pointer;transition:.25s}
+  .btn:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
+  .btn.ghost{border-color:var(--line);color:var(--ink-soft)}
+  .btn:disabled{opacity:.35;cursor:default}
+  .btn-cta{background:var(--gold);color:#fff;border-color:var(--gold);
+    padding:14px 30px;font-size:15px}
+  .btn-cta:hover{background:var(--gold-deep)}
+  .center{text-align:center}
+
+  /* rezultat */
+  #result{display:none}
+  #result.show{display:block;animation:fade .8s}
+  @keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1}}
+  .radar-box{display:flex;justify-content:center;margin:10px 0 6px}
+  .res-name{font-family:var(--serif);font-size:clamp(30px,6vw,44px);text-align:center;
+    color:var(--night);margin-bottom:6px}
+  .res-role{text-align:center;font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:700;margin-bottom:20px}
+  .res-block{background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:14px;
+    padding:18px 20px;margin-bottom:14px}
+  .res-block b{color:var(--gold-deep)}
+  .mantra{font-family:var(--serif);font-style:italic;font-size:24px;text-align:center;
+    color:var(--night);padding:24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:22px 0}
+
+  /* OPERATORUL — chat */
+  #operator{margin-top:8px;background:linear-gradient(165deg,#161d33,#232c49);
+    border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+  .op-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .op-halo{width:44px;height:44px;border-radius:50%;flex:none;
+    background:radial-gradient(circle at 50% 42%,#fff8e6,var(--gold) 58%,transparent 74%);
+    box-shadow:0 0 26px rgba(199,154,62,.7);animation:breathe 5s ease-in-out infinite}
+  .op-title{font-family:var(--serif);font-size:22px;color:#fff;line-height:1}
+  .op-sub{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+    font-weight:700;margin-top:5px}
+  .op-log{display:flex;flex-direction:column;gap:12px;max-height:420px;overflow-y:auto;
+    padding:6px 4px 6px 4px;scroll-behavior:smooth}
+  .op-log::-webkit-scrollbar{width:6px}
+  .op-log::-webkit-scrollbar-thumb{background:rgba(199,154,62,.4);border-radius:9px}
+  .bubble{max-width:86%;padding:13px 16px;border-radius:16px;font-size:15.5px;line-height:1.55;
+    animation:pop .35s ease}
+  @keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  .bubble.op{align-self:flex-start;background:rgba(255,255,255,.94);color:#20242f;
+    border-bottom-left-radius:5px}
+  .bubble.me{align-self:flex-end;background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+    color:#fff;border-bottom-right-radius:5px}
+  .bubble b{color:var(--gold-deep)}
+  .bubble.me b{color:#fff8e6}
+  .typing{align-self:flex-start;background:rgba(255,255,255,.9);padding:14px 18px;border-radius:16px;
+    border-bottom-left-radius:5px;display:inline-flex;gap:5px}
+  .typing span{width:7px;height:7px;border-radius:50%;background:var(--gold-deep);opacity:.5;
+    animation:blink 1.2s infinite}
+  .typing span:nth-child(2){animation-delay:.2s}
+  .typing span:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+  .op-quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--gold);
+    background:rgba(199,154,62,.12);border:1px solid rgba(199,154,62,.4);border-radius:999px;
+    padding:9px 15px;cursor:pointer;transition:.22s}
+  .chip:hover{background:var(--gold);color:#161d33;border-color:var(--gold)}
+  .op-input{display:flex;gap:9px;margin-top:14px}
+  .op-input input{flex:1;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+    border-radius:999px;padding:12px 18px;color:#fff;font-family:var(--sans);font-size:15px;outline:none}
+  .op-input input::placeholder{color:rgba(255,255,255,.45)}
+  .op-input input:focus{border-color:var(--gold)}
+  .op-input .btn{border-color:var(--gold);color:var(--gold);white-space:nowrap}
+  .op-input .btn:hover{background:var(--gold);color:#161d33}
+
+  footer{padding:70px 24px;text-align:center;color:var(--ink-soft)}
+  footer .halo-sm{width:46px;height:46px;border-radius:50%;margin:0 auto 18px;
+    background:radial-gradient(circle,#fff8e6,var(--gold) 60%,transparent 74%);
+    box-shadow:0 0 40px rgba(199,154,62,.5)}
+  footer p{font-size:14px}
+  .divider{width:60px;height:1px;background:var(--gold);margin:0 auto 40px;opacity:.6}
+</style>
+</head>
+<body>
+<canvas id="light"></canvas>
+<div class="aura"></div>
+<div id="progress"></div>
+
+<style>
+  .site-nav{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;justify-content:space-between;
+    padding:14px 26px;transition:.3s;background:linear-gradient(#fbf7efcc,#fbf7ef00);backdrop-filter:blur(2px)}
+  .site-nav.solid{background:rgba(251,247,239,.94);backdrop-filter:blur(10px);
+    box-shadow:0 8px 30px -22px rgba(60,45,10,.5);padding:10px 26px}
+  .sn-brand{font-family:var(--serif);font-weight:600;font-size:24px;letter-spacing:.14em;color:var(--ink);text-decoration:none}
+  .sn-links{display:flex;gap:22px}
+  .sn-links a{font-family:var(--sans);font-size:13.5px;font-weight:600;letter-spacing:.02em;color:var(--ink-soft);
+    text-decoration:none;transition:.2s;position:relative}
+  .sn-links a:hover,.sn-links a.active{color:var(--gold-deep)}
+  .sn-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--gold);border-radius:2px}
+  .sn-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+  .sn-burger span{width:24px;height:2px;background:var(--ink);border-radius:2px;transition:.3s}
+  .site-nav.open .sn-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .site-nav.open .sn-burger span:nth-child(2){opacity:0}
+  .site-nav.open .sn-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  section{scroll-margin-top:72px}
+  @media(max-width:820px){
+    .sn-burger{display:flex}
+    .sn-links{position:fixed;top:58px;left:0;right:0;flex-direction:column;gap:0;background:rgba(251,247,239,.98);
+      backdrop-filter:blur(10px);padding:8px 26px 18px;box-shadow:0 20px 40px -24px rgba(60,45,10,.5);
+      transform:translateY(-150%);transition:.35s;pointer-events:none}
+    .site-nav.open .sn-links{transform:none;pointer-events:auto}
+    .sn-links a{padding:14px 0;border-bottom:1px solid var(--line);font-size:16px}
+  }
+  /* footer bogat */
+  .site-footer{background:linear-gradient(180deg,#171d30,#0f1424);color:#e9e3d4;padding:58px 26px 30px;margin-top:40px}
+  .sf-top{max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between}
+  .sf-brand{max-width:320px}
+  .sf-brand .halo-sm{width:42px;height:42px;border-radius:50%;margin-bottom:14px;
+    background:radial-gradient(circle,#fff8e6,var(--gold) 60%,transparent 74%);box-shadow:0 0 34px rgba(199,154,62,.55)}
+  .sf-name{font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:.14em}
+  .sf-tag{font-family:var(--serif);font-style:italic;color:#b9c2da;margin-top:4px}
+  .sf-col h4{font-family:var(--sans);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:12px;font-weight:700}
+  .sf-col a{display:block;color:#cfd6e6;text-decoration:none;font-size:14.5px;padding:5px 0;transition:.2s}
+  .sf-col a:hover{color:#fff}
+  .sf-quote{max-width:760px;margin:42px auto 0;text-align:center;font-family:var(--serif);font-style:italic;
+    font-size:22px;line-height:1.35;color:#f0ead9;padding-top:30px;border-top:1px solid rgba(255,255,255,.12)}
+  .sf-bottom{text-align:center;margin-top:26px;font-size:13px;color:#8b93a8;letter-spacing:.06em}
+  .sf-bottom a{color:var(--gold);text-decoration:none}
+</style>
+
+<header class="site-nav" id="siteNav">
+  <a href="#cover" class="sn-brand">Elumia</a>
+  <nav class="sn-links" id="snLinks">
+    <a href="#manifest">Manifest</a>
+    <a href="#plan">Planul nevăzut</a>
+    <a href="#demonologie">Demonologie</a>
+    <a href="#strajeri">Străjerii</a>
+    <a href="#marketing">Persuasiune</a>
+    <a href="#joc">Jocul</a>
+    <a href="#practici">Practici</a>
+  </nav>
+  <button class="sn-burger" id="snBurger" aria-label="Meniu"><span></span><span></span><span></span></button>
+</header>
+
+<nav class="toc" aria-label="Cuprins">
+  <a href="#cover" data-label="Copertă"></a>
+  <a href="#manifest" data-label="Manifest"></a>
+  <a href="#plan" data-label="Planul nevăzut"></a>
+  <a href="#demonologie" data-label="Demonologie"></a>
+  <a href="#strajeri" data-label="Cei 7 Străjeri"></a>
+  <a href="#scurgere" data-label="Scurgerea"></a>
+  <a href="#marketing" data-label="Persuasiune"></a>
+  <a href="#joc" data-label="Jocul"></a>
+  <a href="#practici" data-label="Practici"></a>
+</nav>
+
+<!-- COPERTĂ -->
+<section id="cover">
+  <div class="halo"></div>
+  <h1>Elumia</h1>
+  <div class="sub">Ghid elementar pentru planul nevăzut</div>
+  <div class="meta">O carte despre energia ta vitală</div>
+  <div class="scroll-hint">coboară în lumină ↓</div>
+</section>
+
+<!-- MANIFEST -->
+<section id="manifest">
+  <div class="wrap">
+    <div class="kicker reveal">Partea 0 — Manifest</div>
+    <h2 class="reveal">Filozofia luminii</h2>
+    <p class="lead reveal">Premisa de la care pornește tot ce urmează: ești, în esența ta, o sursă inepuizabilă de energie vitală. O lumină. O scânteie dintr-un foc mai mare. Nu o baterie care se descarcă, ci un izvor — ceva ce <em>produce</em> energie, nu doar o consumă.</p>
+    <blockquote class="reveal">„Nu ești o picătură în ocean. Ești întregul ocean, într-o picătură."</blockquote>
+    <p class="reveal">Dacă acest lucru e adevărat, apare imediat o întrebare stânjenitoare: de ce ne simțim atât de des goliți, obosiți, „secați"? Răspunsul pe care îl explorează această carte: nu pentru că izvorul ar seca vreodată, ci pentru că <strong>energia se scurge prin canale de care nu suntem conștienți.</strong> Frica, rușinea, comparația, dependența, resentimentul, nevoia de aprobare — toate sunt „robinete" deschise. În limbajul vechi al demonologiei, exact acestea erau numite <em>demoni</em>: forțe care se hrănesc din lumina ta fără ca tu să observi.</p>
+    <p class="reveal">Cartea nu îți cere să crezi în ființe din altă lume. Îți cere ceva mai simplu și mai greu: să observi unde se scurge lumina ta — și să înveți să închizi robinetele.</p>
+    <h3 class="reveal">Trei principii fondatoare</h3>
+    <ul class="clean reveal">
+      <li><strong>Lumina nu poate fi luată, doar cedată.</strong> Nimeni nu îți fură energia vitală. O oferi — de obicei fără să știi, în schimbul unei iluzii de siguranță, apartenență sau control.</li>
+      <li><strong>Planul nevăzut este mintea.</strong> Ceea ce tradiția numea „lumea spiritelor" se suprapune aproape perfect peste ceea ce psihologia numește azi inconștient, tipare, condiționări. „Nevăzut" nu înseamnă inexistent — înseamnă sub pragul atenției.</li>
+      <li><strong>A numi înseamnă a stăpâni.</strong> Vechea intuiție magică — că a cunoaște numele unui demon îți dă putere asupra lui — este literalmente adevărată la nivel psihologic. O forță pe care o poți numi cu precizie încetează să te mai conducă orbește.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PLANUL NEVĂZUT -->
+<section id="plan">
+  <div class="wrap">
+    <div class="kicker reveal">Partea I</div>
+    <h2 class="reveal">Ce este planul nevăzut</h2>
+    <p class="reveal">Planul nevăzut este stratul de procese care îți modelează experiența fără să apară direct în conștiință. Impulsuri, reflexe emoționale, presupuneri despre lume, „voci" interioare, automatisme. Nu îl vezi, dar te conduce — la fel cum nu vezi curentul unui râu, dar el hotărăște unde ajunge barca.</p>
+    <h3 class="reveal">De ce rămâne „nevăzut"</h3>
+    <ul class="clean reveal">
+      <li><strong>Viteză.</strong> Reacțiile automate se produc în milisecunde, înainte ca gândul conștient să apuce să se formeze.</li>
+      <li><strong>Vechime.</strong> Multe tipare s-au format în copilărie, într-un limbaj pre-verbal — de aceea nu pot fi „ținute minte", doar simțite.</li>
+      <li><strong>Utilitate aparentă.</strong> Fiecare tipar a fost, cândva, o soluție. De aceea mintea îl apără — îl confundă cu tine.</li>
+    </ul>
+    <h3 class="reveal">Cele trei straturi</h3>
+    <div class="layers">
+      <div class="layer l1 reveal"><h3>1 · Stratul Reactiv</h3><p>Reflexele emoționale imediate — frică, furie, poftă, rușine. Cel mai vechi și mai rapid. Aici „locuiesc" majoritatea demonilor clasici.</p></div>
+      <div class="layer l2 reveal"><h3>2 · Stratul Narativ</h3><p>Poveștile pe care ți le spui despre cine ești, ce meriți, cum e lumea. Aici trăiesc credințele-limită și scenariile repetitive.</p></div>
+      <div class="layer l3 reveal"><h3>3 · Stratul Luminos</h3><p>Sursa. Conștiința care poate observa primele două straturi fără să fie prinsă în ele. Ținta întregului parcurs.</p></div>
+    </div>
+    <p class="reveal" style="margin-top:26px">Întreaga „lucrare" a cărții este mișcarea de la stratul 1 spre stratul 3: de la <em>a fi</em> reacția, la <em>a avea</em> reacția, la <em>a observa</em> reacția.</p>
+  </div>
+</section>
+
+<!-- DEMONOLOGIE -->
+<section id="demonologie">
+  <div class="wrap">
+    <div class="kicker reveal">Partea II</div>
+    <h2 class="reveal">Demonologia ca hartă a forțelor</h2>
+    <p class="reveal">Timp de milenii, culturi complet diferite — mesopotamiene, ebraice, creștine, egiptene, indiene — au construit taxonomii detaliate ale „spiritelor" care influențează omul. E tentant să le respingem ca superstiție. Dar oamenii aceia observau, de fapt, ceva foarte real: <strong>tiparele recurente ale suferinței umane.</strong> Nu aveau vocabularul psihologiei, așa că le-au dat chipuri, nume și ierarhii.</p>
+    <p class="reveal">Un demon medieval al lăcomiei și un studiu modern despre mecanismele dependenței descriu, în fond, <em>același fenomen</em> — o forță care cere din ce în ce mai mult și dă din ce în ce mai puțin. Cartea folosește ambele limbaje: cel mitic pentru forța lui evocatoare, cel psihologic pentru precizie și utilitate.</p>
+    <h3 class="reveal">Tradițiile pe scurt</h3>
+    <ul class="clean reveal">
+      <li><strong>Demonologia mesopotamiană.</strong> Lamashtu, Pazuzu — spiritele bolii și ale vântului, primele încercări de a numi ceea ce apasă mintea.</li>
+      <li><strong>Tradiția ebraică și creștină.</strong> Cele șapte păcate capitale ca sistem timpuriu de „psihologie a viciului".</li>
+      <li><strong>Goetia și grimoarele renascentiste.</strong> Cei 72 de „spirite" din Ars Goetia, citiți ca un catalog de facultăți și obsesii ale minții.</li>
+      <li><strong>Perspectiva comparată.</strong> Aceleași tipare apar sub nume diferite în culturi care nu au comunicat niciodată — semn că descriu ceva universal-uman.</li>
+    </ul>
+    <blockquote class="reveal">A numi o forță cu precizie e primul act de putere asupra ei. Restul cărții îți dă numele.</blockquote>
+  </div>
+</section>
+
+<!-- CEI 7 STRĂJERI -->
+<section id="strajeri">
+  <div class="wrap">
+    <div class="kicker reveal">Partea III</div>
+    <h2 class="reveal">Cei 7 Străjeri ai scurgerii</h2>
+    <p class="reveal">Condensăm întreaga tradiție în șapte forțe interioare. Fiecare nu este un „inamic" de învins, ci <strong>un mesager deghizat</strong>: frica păzește o valoare, mânia semnalează o limită, pofta arată un gol real. Munca nu e să-i alungi, ci să le asculți mesajul și să nu-i mai lași să conducă.</p>
+    <div class="guardians">
+      <div class="g-card reveal"><span class="num">1</span><div class="role">Paznicul</div><h3>Frica</h3><p>Anticiparea pericolului. Îți proiectează în minte catastrofe care rareori se întâmplă, ca să te țină „în siguranță" prin imobilitate.</p><div class="row"><span class="tag">se hrănește din: nesiguranță</span><span class="tag anti">antidot: prezența</span></div></div>
+      <div class="g-card reveal"><span class="num">2</span><div class="role">Vălul</div><h3>Rușinea</h3><p>Șoapta „sunt defect". Nu spune că ai greșit, ci că ești greșit. Trăiește din secret și comparație.</p><div class="row"><span class="tag">se hrănește din: comparație</span><span class="tag anti">antidot: acceptarea</span></div></div>
+      <div class="g-card reveal"><span class="num">3</span><div class="role">Focul</div><h3>Mânia</h3><p>Reacția la o limită încălcată. Utilă ca semnal, distructivă ca stăpân. Sub ea stă adesea neputința.</p><div class="row"><span class="tag">se hrănește din: nedreptate</span><span class="tag anti">antidot: limita clară</span></div></div>
+      <div class="g-card reveal"><span class="num">4</span><div class="role">Golul</div><h3>Pofta</h3><p>Nevoia de „mai mult" care nu se satură niciodată. Cere umplere din afară pentru un gol care e, de fapt, interior.</p><div class="row"><span class="tag">se hrănește din: vid, plictis</span><span class="tag anti">antidot: suficiența</span></div></div>
+      <div class="g-card reveal"><span class="num">5</span><div class="role">Masca</div><h3>Trufia</h3><p>„Trebuie să fiu superior." O armură strălucitoare peste frica de a fi irelevant. Cu cât mai groasă masca, cu atât mai fragil dedesubt.</p><div class="row"><span class="tag">se hrănește din: frica de irelevanță</span><span class="tag anti">antidot: apartenența</span></div></div>
+      <div class="g-card reveal"><span class="num">6</span><div class="role">Oglinda</div><h3>Invidia</h3><p>„Al altuia e mai bun." Îți fură atenția de la drumul propriu și o lipește de al altcuiva, măsurându-te veșnic.</p><div class="row"><span class="tag">se hrănește din: lipsă de sens</span><span class="tag anti">antidot: recunoștința</span></div></div>
+      <div class="g-card reveal"><span class="num">7</span><div class="role">Ceața</div><h3>Inerția</h3><p>Amânarea, amorțeala, „mâine". Te protejează de eșec ținându-te nemișcat — dar nemișcarea e o formă lentă de scurgere.</p><div class="row"><span class="tag">se hrănește din: frica de eșec</span><span class="tag anti">antidot: pasul mic</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCURGEREA -->
+<section id="scurgere">
+  <div class="wrap">
+    <div class="kicker reveal">Partea IV</div>
+    <h2 class="reveal">Anatomia unei scurgeri de energie</h2>
+    <p class="reveal">Fiecare Străjer operează prin același ciclu în patru pași. A-l vedea înseamnă a-l putea întrerupe.</p>
+    <ul class="clean reveal">
+      <li><strong>1 · Declanșatorul.</strong> Un eveniment mic — o privire, un mesaj, un gând.</li>
+      <li><strong>2 · Reacția automată.</strong> Străjerul se activează (stratul Reactiv).</li>
+      <li><strong>3 · Povestea.</strong> Mintea justifică reacția (stratul Narativ): „vezi, iar am eșuat".</li>
+      <li><strong>4 · Scurgerea.</strong> Energie cheltuită pe frică, ruminație și apărare, în loc de acțiune.</li>
+    </ul>
+    <h3 class="reveal">Punctul de întrerupere</h3>
+    <p class="reveal">Singurul loc unde poți interveni este <strong>între pasul 2 și 3</strong> — clipa dinaintea poveștii. Tradiția o numea „veghe". Psihologia o numește defuziune. Practica e aceeași: observi reacția fără să te contopești cu ea. <em>„E frică"</em> în loc de <em>„mi-e frică".</em> O silabă diferență — o lume diferență.</p>
+  </div>
+</section>
+
+<!-- MARKETING / PERSUASIUNE -->
+<section id="marketing">
+  <div class="wrap">
+    <div class="kicker reveal">Partea V</div>
+    <h2 class="reveal">Persuasiunea și apărarea minții</h2>
+    <p class="reveal">Marketingul modern este știința aplicată a influențării planului nevăzut. Un mesaj de vânzare bine făcut nu convinge stratul rațional — el se adresează direct Străjerilor. Frica („ratezi oferta"), invidia („uite ce au alții"), trufia („tu meriți exclusivitatea"), pofta („mai mult, acum"). Aceleași șapte forțe pe care le-am cartografiat.</p>
+    <p class="reveal">De aceea această parte are dublu rol: să explice <strong>cum funcționează persuasiunea</strong> și, mai important, să te învețe <strong>cum să-ți aperi lumina</strong> de persuasiunea care te golește. Cunoașterea mecanismului este scut.</p>
+    <h3 class="reveal">Cele șase pârghii ale influenței</h3>
+    <div class="levers">
+      <div class="lever reveal"><h4>Reciprocitatea</h4><small>exploatează: obligația</small><p>Primești ceva „gratis", te simți dator.</p></div>
+      <div class="lever reveal"><h4>Consecvența</h4><small>exploatează: Masca</small><p>Un mic „da" te obligă la unul mare, ca să rămâi coerent.</p></div>
+      <div class="lever reveal"><h4>Dovada socială</h4><small>exploatează: Oglinda</small><p>„Toți fac asta" — frica de a fi exclus.</p></div>
+      <div class="lever reveal"><h4>Autoritatea</h4><small>exploatează: Paznicul</small><p>Un simbol de expertiză dezarmează gândirea critică.</p></div>
+      <div class="lever reveal"><h4>Simpatia</h4><small>exploatează: apartenența</small><p>Cumperi de la cine îți place.</p></div>
+      <div class="lever reveal"><h4>Raritatea</h4><small>exploatează: Golul</small><p>„Ultimele locuri", „doar azi" — frica de pierdere.</p></div>
+    </div>
+    <blockquote class="reveal">Persuasiunea etică aprinde lumina celuilalt. Manipularea o consumă. Aceeași tehnică — intenții opuse.</blockquote>
+    <div class="shield reveal">
+      <h3>Scutul: cele trei întrebări</h3>
+      <p style="color:rgba(255,255,255,.8)">Trei întrebări care neutralizează aproape orice manipulare, oprind reacția înainte de povestea din pasul 3.</p>
+      <ol>
+        <li><strong>„Ce simt chiar acum?"</strong> — identifică Străjerul activat.</li>
+        <li><strong>„Cine câștigă dacă acționez din emoția asta?"</strong> — dezvăluie mecanismul.</li>
+        <li><strong>„Ce aș face dacă aș avea tot timpul din lume?"</strong> — dezarmează raritatea și frica.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- JOCUL -->
+<section id="joc">
+  <div class="wrap">
+    <div class="kicker reveal">Partea VI — Jocul</div>
+    <h2 class="reveal">Harta Străjerilor tăi</h2>
+    <p class="reveal">Un chestionar care, prin răspunsurile tale, desenează structura ta mentală: care dintre cei 7 Străjeri îți consumă cel mai mult lumina și pe unde se scurge energia. Nu o etichetă — o hartă cu antidoturi. Fără răspunsuri greșite. Bara de energie de mai jos „se scurge" spre Străjerul tău dominant pe măsură ce răspunzi.</p>
+
+    <div id="quiz-wrap" class="reveal">
+      <div id="quiz">
+        <div class="q-energy"><i id="energyBar"></i></div>
+        <div class="q-count" id="qCount">Întrebarea 1 din 21</div>
+        <div class="q-text" id="qText"></div>
+        <div class="q-opts" id="qOpts"></div>
+        <div class="q-nav">
+          <button class="btn ghost" id="backBtn" disabled>← Înapoi</button>
+          <span class="q-count" id="domHint"></span>
+        </div>
+      </div>
+
+      <div id="result">
+        <div class="res-role" style="margin-bottom:6px">Structura ta mentală</div>
+        <div class="radar-box"><canvas id="radar" width="420" height="360"></canvas></div>
+        <div class="res-name" id="resName"></div>
+        <div class="res-role" id="resRole"></div>
+        <div class="res-block"><b>Mesajul deghizat.</b> <span id="resMsg"></span></div>
+        <div class="res-block"><b>Cum îl recunoști.</b> <span id="resSign"></span></div>
+        <div class="res-block"><b>Antidotul tău.</b> <span id="resAnti"></span></div>
+        <div class="mantra" id="resMantra"></div>
+
+        <div id="operator">
+          <div class="op-head">
+            <div class="op-halo"></div>
+            <div><div class="op-title">Operatorul</div><div class="op-sub">interpret al hărții tale</div></div>
+          </div>
+          <div class="op-log" id="opLog"></div>
+          <div class="op-quick" id="opQuick"></div>
+          <div class="op-input">
+            <input id="opText" type="text" autocomplete="off" placeholder="Scrie ce simți sau o situație…" />
+            <button class="btn" id="opSend">Trimite</button>
+          </div>
+        </div>
+
+        <div class="center" style="margin-top:24px"><button class="btn btn-cta" id="restartBtn">Reia harta ↺</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICI -->
+<section id="practici">
+  <div class="wrap">
+    <div class="kicker reveal">Partea VII</div>
+    <h2 class="reveal">Practici pentru a păstra lumina</h2>
+    <p class="reveal">Cunoașterea fără practică rămâne decor. Iată micro-exercițiile care lucrează exact în „punctul de întrerupere".</p>
+    <ul class="clean reveal">
+      <li><strong>Numirea (10 secunde).</strong> Când simți o reacție, spune în gând: „E frică" / „E invidie". Trece de la a fi emoția la a o observa.</li>
+      <li><strong>Trei respirații.</strong> Înainte de orice reacție importantă, trei respirații lente. Creezi spațiul dintre pasul 2 și 3.</li>
+      <li><strong>Fraza de veghe.</strong> O propoziție scurtă, personală, pe care o repeți când Străjerul dominant se activează. (Jocul îți dă una la final.)</li>
+      <li><strong>Scanarea de seară.</strong> Un minut înainte de culcare: „Unde s-a scurs lumina azi?" Fără judecată — doar observație.</li>
+      <li><strong>Pasul mic.</strong> Împotriva Ceței: cea mai mică acțiune posibilă acum, nu planul perfect de mâine.</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="sf-top">
+    <div class="sf-brand">
+      <div class="halo-sm"></div>
+      <div class="sf-name">Elumia</div>
+      <p class="sf-tag">Ghid elementar pentru planul nevăzut</p>
+    </div>
+    <div class="sf-col">
+      <h4>Cartea</h4>
+      <a href="#manifest">Manifest</a>
+      <a href="#plan">Planul nevăzut</a>
+      <a href="#demonologie">Demonologie</a>
+      <a href="#scurgere">Scurgerea</a>
+    </div>
+    <div class="sf-col">
+      <h4>Practica</h4>
+      <a href="#strajeri">Cei 7 Străjeri</a>
+      <a href="#marketing">Persuasiune</a>
+      <a href="#joc">Jocul</a>
+      <a href="#practici">Practici</a>
+    </div>
+  </div>
+  <div class="sf-quote">„Ești o sursă inepuizabilă. Rămâne doar să nu mai cedezi lumina fără să știi."</div>
+  <div class="sf-bottom">© 2026 Elumia · <a href="#cover">Înapoi sus ↑</a></div>
+</footer>
+
+<script>
+/* ============ meniu de sus ============ */
+(function(){
+  var navEl=document.getElementById('siteNav');
+  var burger=document.getElementById('snBurger');
+  var links=[].slice.call(document.querySelectorAll('#snLinks a'));
+  burger.addEventListener('click',function(){navEl.classList.toggle('open');});
+  links.forEach(function(a){a.addEventListener('click',function(){navEl.classList.remove('open');});});
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function onScroll(){
+    navEl.classList.toggle('solid',scrollY>40);
+    var st=scrollY,idx=-1;
+    secs.forEach(function(s,i){if(s&&s.offsetTop-90<=st)idx=i;});
+    links.forEach(function(a,i){a.classList.toggle('active',i===idx);});
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+
+/* ============ fundal de lumină (particule) ============ */
+(function(){
+  const c=document.getElementById('light'),x=c.getContext('2d');
+  let w,h,parts;
+  function size(){w=c.width=innerWidth;h=c.height=innerHeight;
+    parts=Array.from({length:Math.min(70,Math.floor(w/22))},()=>({
+      x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+.5,
+      s:Math.random()*.4+.1,o:Math.random()*.5+.2,d:Math.random()*Math.PI*2}));}
+  size();addEventListener('resize',size);
+  (function loop(){
+    x.clearRect(0,0,w,h);
+    for(const p of parts){
+      p.y-=p.s;p.x+=Math.sin(p.d+=0.01)*.3;
+      if(p.y<-5){p.y=h+5;p.x=Math.random()*w;}
+      x.beginPath();x.arc(p.x,p.y,p.r,0,7);
+      x.fillStyle='rgba(199,154,62,'+p.o+')';
+      x.shadowBlur=8;x.shadowColor='rgba(199,154,62,.8)';x.fill();
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ============ progres + cuprins activ + reveal ============ */
+(function(){
+  const bar=document.getElementById('progress');
+  const links=[...document.querySelectorAll('nav.toc a')];
+  const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+  addEventListener('scroll',()=>{
+    const st=scrollY,dh=document.body.scrollHeight-innerHeight;
+    bar.style.width=(st/dh*100)+'%';
+    let idx=0;secs.forEach((s,i)=>{if(s&&s.offsetTop-140<=st)idx=i;});
+    links.forEach((a,i)=>a.classList.toggle('active',i===idx));
+  });
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+/* ============ BILINGV: date + traducere statică ============ */
+window.LUMINA_DB = {"ro":{"G":{"F":{"name":"Frica","role":"Paznicul","msg":"În spatele fricii stă mereu o valoare pe care vrei s-o protejezi. Ascult-o, nu o lăsa să conducă.","sign":"Corpul se strânge, mintea fuge în „ce-ar fi dacă\", eviți înainte să încerci.","anti":"Prezența. Revino în „acum\" prin corp — trei respirații, tălpile pe podea. Pericolul imaginat își pierde puterea.","mantra":"Sunt în siguranță în clipa aceasta."},"R":{"name":"Rușinea","role":"Vălul","msg":"Rușinea spune „ești defect\". E o minciună veche. Ai greșit — nu ești o greșeală.","sign":"Vrei să dispari, ascunzi, te compari și pierzi mereu.","anti":"Acceptarea blândă. Expune ceea ce ascunzi, într-un loc sigur. Rușinea se topește în lumină și în a fi văzut.","mantra":"Sunt suficient, exact așa cum sunt acum."},"M":{"name":"Mânia","role":"Focul","msg":"Mânia semnalează o limită încălcată. E un mesager corect cu maniere proaste.","sign":"Căldură bruscă, vrei să lovești (în cuvinte sau fapte), sub ea — neputință.","anti":"Limita clară. Transformă focul în graniță calmă: „Asta nu e ok pentru mine.\" Fără să arzi puntea.","mantra":"Îmi apăr limita fără să-mi pierd calmul."},"P":{"name":"Pofta","role":"Golul","msg":"Pofta arată un gol real. Dar golul e interior — nu poate fi umplut din afară.","sign":"Mereu „încă unul\", „încă puțin\"; savurezi puțin, cauți mult.","anti":"Suficiența. Oprește-te și savurează ce ai deja. Întreabă: ce gol încerc, de fapt, să umplu?","mantra":"Am destul. Sunt destul."},"T":{"name":"Trufia","role":"Masca","msg":"Trufia e o armură peste frica de a fi irelevant. Cu cât masca e mai groasă, cu atât e mai fragil dedesubt.","sign":"Nevoia de a avea dreptate, de a fi superior, greu să ceri ajutor.","anti":"Apartenența. Lasă masca jos cu cineva de încredere. Nu trebuie să fii deasupra ca să fii demn de iubire.","mantra":"Sunt egal, nu deasupra. Aici e locul meu."},"I":{"name":"Invidia","role":"Oglinda","msg":"Invidia arată o dorință proprie — dar te uită la drumul altuia în loc de al tău.","sign":"Măsori mereu, bucuria altuia te doare, îți lipsește sensul propriu.","anti":"Recunoștința și drumul propriu. Întreabă: ce îmi arată invidia că îmi doresc cu adevărat? Apoi fă un pas spre asta.","mantra":"Drumul meu e al meu. Merg pe el."},"N":{"name":"Inerția","role":"Ceața","msg":"Inerția te protejează de eșec ținându-te nemișcat. Dar nemișcarea e o scurgere lentă.","sign":"Amâni, amorțeală, „mâine\", ziua trece fără să începi.","anti":"Pasul mic. Nu planul perfect — cea mai mică acțiune posibilă acum, două minute. Mișcarea risipește ceața.","mantra":"Un pas mic acum e mai mult decât un plan perfect mâine."}},"Q":[{"t":"Primești un mesaj scurt de la cineva important: „Putem vorbi?\" Prima reacție dinăuntru:","o":[["Inima o ia razna, deja îmi imaginez ce-am greșit.",{"F":2}],["Mă enervez că mă ține în suspans.",{"M":2}],["Cred că vrea ceva de la mine — iar sunt folosit.",{"T":1,"M":1}],["Observ neliniștea, respir, răspund calm.",{}]]},{"t":"Un coleg primește exact lauda pe care ți-o doreai. Simți:","o":[["Un gol în stomac — „de ce el și nu eu?\".",{"I":2}],["„Oricum eu am făcut mai mult.\" ",{"T":2}],["Rușine că nu am fost eu remarcat.",{"R":2}],["Mă bucur pentru el, îmi văd de treaba mea.",{}]]},{"t":"E ora 23:40. Ai zis că azi te culci devreme. Mâna caută deja telefonul.","o":[["„Doar cinci minute\" — și știu că nu vor fi cinci.",{"P":2,"N":1}],["O ușoară vină, dar deschid oricum.",{"R":1,"P":1}],["Mă enervez pe mine că iar fac asta.",{"M":1,"T":1}],["Observ impulsul, respir, pun telefonul jos.",{}]]},{"t":"Ai de început un proiect mare și important. Cum e dimineața aceea?","o":[["Îmi fac încă o cafea, mai citesc ceva, „încep în curând\".",{"N":2}],["Mi-e frică să nu iasă prost, așa că amân.",{"F":1,"N":1}],["Vreau să iasă perfect de la prima încercare.",{"T":2}],["Fac primul pas mic, chiar imperfect.",{}]]},{"t":"Cineva te critică în public, pe nedrept. În secunda aceea:","o":[["Mă înroșesc, vreau să dispar.",{"R":2}],["Simt cum urcă focul, vreau să ripostez tăios.",{"M":2}],["Îngheț și nu mai spun nimic de teamă.",{"F":2}],["Respir, îmi apăr punctul calm și clar.",{}]]},{"t":"Vezi pe rețele viața „perfectă\" a cuiva. După 10 minute de scroll:","o":[["Mă simt în urmă cu propria viață.",{"I":2}],["„A mea e oricum mai autentică.\" ",{"T":1,"I":1}],["Vreau și eu, imediat, tot ce văd acolo.",{"P":2}],["Închid aplicația, revin la ce contează pentru mine.",{}]]},{"t":"Ți se oferă o șansă nouă, dar nesigură. Vocea din cap spune:","o":[["„Și dacă eșuezi și râd toți de tine?\"",{"F":2}],["„Nu acum, poate mai încolo.\" (și nu vine niciodată)",{"N":2}],["„Trebuie să fii sigur că ești cel mai bun întâi.\" ",{"T":2}],["„Hai să încerc și să văd.\" ",{}]]},{"t":"Ai mâncat/cumpărat ceva ca să te simți mai bine. După aceea:","o":[["Vreau imediat încă puțin — nu m-am săturat.",{"P":2}],["Mă simt vinovat și rușinat.",{"R":2}],["Mă cert singur că n-am autocontrol.",{"M":1,"T":1}],["Observ ce gol încercam să umplu.",{}]]},{"t":"Un prieten îți cere ajutor, dar tu ești obosit. Reacția reală:","o":[["Spun „da\" de frică să nu-l supăr.",{"F":2}],["Mă enervează că iar apelează la mine.",{"M":2}],["Îl ajut ca să par indispensabil.",{"T":2}],["Spun sincer cât pot oferi acum.",{}]]},{"t":"Te uiți în oglindă înainte de un eveniment. Gândul dominant:","o":[["„Nu arăt destul de bine, o să mă judece toți.\"",{"R":1,"F":1}],["„Trebuie să fiu cel mai impresionant din sală.\"",{"T":2}],["„Alții arată oricum mai bine ca mine.\"",{"I":2}],["„Sunt ok așa cum sunt\", și plec liniștit.",{}]]},{"t":"Ai făcut o greșeală pe care nimeni n-a observat-o. Interior:","o":[["Mă macină ore întregi, o rederulez la nesfârșit.",{"R":2}],["Mi-e teamă că va ieși la iveală.",{"F":2}],["O ascund și mă prefac că n-a fost.",{"T":1,"R":1}],["Recunosc, repar dacă pot, merg mai departe.",{}]]},{"t":"Cineva primește promovarea pe care o voiai. Prima seară acasă:","o":[["Rumeg de ce nu am fost eu ales.",{"I":2}],["„Sistemul e nedrept, meritam eu.\"",{"M":1,"T":1}],["Mă simt un ratat.",{"R":2}],["Îmi notez ce vreau eu, de fapt, și cum ajung acolo.",{}]]},{"t":"Ai timp liber neașteptat, o oră doar a ta. O folosești:","o":[["Rămân blocat pe telefon fără să observ cum trece.",{"N":1,"P":1}],["Mă apucă neliniștea că „pierd timp\".",{"F":1,"M":1}],["Caut ceva care să-mi dea un plus de „mai mult\".",{"P":2}],["Fac ceva ce chiar mă hrănește, prezent.",{}]]},{"t":"Într-o discuție aprinsă, celălalt are dreptate. Tu:","o":[["Nu recunosc, caut un contraargument.",{"T":2}],["Cedez de frică să nu fie conflict.",{"F":2}],["Ridic tonul ca să nu par slab.",{"M":2}],["Recunosc simplu: „Ai dreptate.\"",{}]]},{"t":"Dimineața, primul gând înainte să te dai jos din pat:","o":[["„Iar o zi grea, oare fac față?\"",{"F":2}],["„Nu am chef de nimic.\" ",{"N":2}],["„Ce-mi mai lipsește ca să fiu în sfârșit ok?\"",{"P":1,"I":1}],["„Ce lucru mic bun pot face azi?\"",{}]]},{"t":"Cineva te complimentează sincer. Reacția interioară:","o":[["Nu-l cred, „sigur e din politețe\".",{"R":2}],["„Evident, era de așteptat.\"",{"T":2}],["Mă fâstâcesc și schimb subiectul de jenă.",{"R":1,"F":1}],["Primesc: „Mulțumesc, mă bucur.\"",{}]]},{"t":"Ai un conflict nerezolvat cu cineva drag. Cum îl porți?","o":[["Evit persoana, sper să treacă de la sine.",{"F":1,"N":1}],["Fierb pe interior și repet ce-i voi zice.",{"M":2}],["Aștept să facă ea primul pas — eu am dreptate.",{"T":2}],["Deschid eu discuția, calm.",{}]]},{"t":"Un obiectiv la care ții cere efort zilnic. După 4 zile:","o":[["M-am oprit deja — „nu e momentul potrivit\".",{"N":2}],["Mă cert dur pentru fiecare zi ratată.",{"M":1,"R":1}],["Vreau rezultate mari acum, mă plictisesc de pași.",{"P":2}],["Continui cu pasul mic, chiar imperfect.",{}]]},{"t":"Vezi pe cineva făcând exact ce visai și tu să faci. Simți:","o":[["„Eu n-aș reuși niciodată așa.\"",{"F":1,"R":1}],["O invidie ascuțită, „de ce el?\".",{"I":2}],["„Aș fi făcut-o mai bine.\"",{"T":2}],["Inspirație: „Deci se poate. Încep și eu.\"",{}]]},{"t":"Ești singur seara, fără planuri. Senzația care apare:","o":[["Un gol pe care vreau să-l umplu urgent cu ceva.",{"P":2}],["Neliniște, „ceva nu e în regulă cu mine\".",{"R":1,"F":1}],["Amorțeală, las timpul să treacă.",{"N":2}],["Liniște — îmi țin companie fără să fug.",{}]]},{"t":"La final, sincer: care voce o auzi cel mai des în tine?","o":[["„Ai grijă, ferește-te, s-ar putea să iasă rău.\"",{"F":2}],["„Nu ești destul de bun.\"",{"R":2}],["„Meriți mai mult, nu te mulțumi cu asta.\"",{"P":1,"I":1}],["„Ești ok. Mergi mai departe, un pas.\"",{}]]}],"MICRO":{"F":["Numește-o: spune în gând „e frică\", nu „mi-e frică\".","Trei respirații lente, tălpile apăsate în podea.","Întreabă: „Ce valoare încearcă frica să-mi protejeze?\""],"R":["Scrie într-un rând ce ascunzi — doar pentru tine.","Înlocuiește „sunt greșit\" cu „am greșit\".","Spune cuiva de încredere un lucru mic și adevărat despre tine."],"M":["Înainte să reacționezi, numără până la 6 respirând.","Formulează limita: „Asta nu e ok pentru mine.\"","Întreabă: ce neputință se ascunde sub foc?"],"P":["Oprește-te 30 de secunde și savurează ce ai deja.","Întreabă: „Ce gol încerc, de fapt, să umplu?\"","Amână „încă unul\" cu 5 minute și observă valul trecând."],"T":["Cere azi ajutor la un lucru mic, deși poți singur.","Recunoaște-i cuiva un merit, sincer.","Lasă o dată să nu ai ultimul cuvânt."],"I":["Transformă invidia în busolă: „Ce îmi arată că vreau?\"","Notează un pas mic spre acel lucru.","Spune trei recunoștințe pentru drumul tău."],"N":["Fă doar 2 minute din sarcină — atât.","Cel mai mic pas posibil, nu planul perfect.","Pornește un cronometru de 5 minute și începe."]}},"en":{"G":{"F":{"name":"Fear","role":"The Watchman","msg":"Behind fear there is always a value you want to protect. Listen to it; don’t let it lead.","sign":"The body tightens, the mind runs to “what if”, you avoid before you even try.","anti":"Presence. Return to “now” through the body — three breaths, soles on the floor. Imagined danger loses its power.","mantra":"I am safe in this moment."},"R":{"name":"Shame","role":"The Veil","msg":"Shame says “you are defective”. It’s an old lie. You made a mistake — you are not a mistake.","sign":"You want to disappear, you hide, you compare and always lose.","anti":"Gentle acceptance. Expose what you hide, in a safe place. Shame melts in the light and in being seen.","mantra":"I am enough, exactly as I am now."},"M":{"name":"Anger","role":"The Fire","msg":"Anger signals a boundary that was crossed. A correct messenger with bad manners.","sign":"Sudden heat, you want to strike (in words or deeds), and beneath it — powerlessness.","anti":"The clear boundary. Turn the fire into a calm border: “This is not ok for me.” Without burning the bridge.","mantra":"I defend my boundary without losing my calm."},"P":{"name":"Craving","role":"The Void","msg":"Craving points to a real emptiness. But the emptiness is inside — it can’t be filled from outside.","sign":"Always “one more”, “a little more”; you savor little, you seek a lot.","anti":"Enoughness. Stop and savor what you already have. Ask: what emptiness am I really trying to fill?","mantra":"I have enough. I am enough."},"T":{"name":"Pride","role":"The Mask","msg":"Pride is armor over the fear of being irrelevant. The thicker the mask, the more fragile beneath.","sign":"The need to be right, to be superior, hard to ask for help.","anti":"Belonging. Lower the mask with someone you trust. You don’t have to be above to be worthy of love.","mantra":"I am equal, not above. This is my place."},"I":{"name":"Envy","role":"The Mirror","msg":"Envy shows a desire of your own — but you look at someone else’s path instead of yours.","sign":"You always measure, another’s joy hurts you, you lack your own meaning.","anti":"Gratitude and your own path. Ask: what does envy show me that I truly want? Then take a step toward it.","mantra":"My path is mine. I walk it."},"N":{"name":"Inertia","role":"The Fog","msg":"Inertia protects you from failure by keeping you still. But stillness is a slow leak.","sign":"You postpone, numbness, “tomorrow”, the day passes without starting.","anti":"The small step. Not the perfect plan — the smallest possible action now, two minutes. Movement scatters the fog.","mantra":"A small step now is more than a perfect plan tomorrow."}},"Q":[{"t":"You get a short message from someone important: “Can we talk?” The first reaction inside:","o":[["My heart races, I already imagine what I did wrong.",{"F":2}],["I get annoyed that they keep me in suspense.",{"M":2}],["I think they want something from me — I’m being used again.",{"T":1,"M":1}],["I notice the unease, breathe, answer calmly.",{}]]},{"t":"A colleague gets exactly the praise you wanted. You feel:","o":[["A pit in my stomach — “why them and not me?”.",{"I":2}],["“I did more anyway.”",{"T":2}],["Shame that I wasn’t the one noticed.",{"R":2}],["I’m happy for them, I mind my own work.",{}]]},{"t":"It’s 11:40 pm. You said you’d sleep early tonight. Your hand already reaches for the phone.","o":[["“Just five minutes” — and I know it won’t be five.",{"P":2,"N":1}],["A slight guilt, but I open it anyway.",{"R":1,"P":1}],["I get angry at myself for doing this again.",{"M":1,"T":1}],["I notice the impulse, breathe, put the phone down.",{}]]},{"t":"You have to start a big, important project. How is that morning?","o":[["I make another coffee, read a bit more, “I’ll start soon”.",{"N":2}],["I’m afraid it will turn out badly, so I postpone.",{"F":1,"N":1}],["I want it perfect on the first try.",{"T":2}],["I take the first small step, even imperfect.",{}]]},{"t":"Someone criticizes you in public, unfairly. In that second:","o":[["I blush, I want to disappear.",{"R":2}],["I feel the fire rising, I want to snap back sharply.",{"M":2}],["I freeze and say nothing out of fear.",{"F":2}],["I breathe, defend my point calmly and clearly.",{}]]},{"t":"You see someone’s “perfect” life on social media. After 10 minutes of scrolling:","o":[["I feel behind in my own life.",{"I":2}],["“Mine is more authentic anyway.”",{"T":1,"I":1}],["I want everything I see there, right now.",{"P":2}],["I close the app, return to what matters to me.",{}]]},{"t":"You’re offered a new but uncertain chance. The voice in your head says:","o":[["“What if you fail and everyone laughs at you?”",{"F":2}],["“Not now, maybe later.” (and it never comes)",{"N":2}],["“You must be sure you’re the best first.”",{"T":2}],["“Let me try and see.”",{}]]},{"t":"You ate or bought something to feel better. Afterwards:","o":[["I immediately want a bit more — I’m not satisfied.",{"P":2}],["I feel guilty and ashamed.",{"R":2}],["I scold myself for having no self-control.",{"M":1,"T":1}],["I notice what emptiness I was trying to fill.",{}]]},{"t":"A friend asks for help, but you’re tired. The real reaction:","o":[["I say “yes” for fear of upsetting them.",{"F":2}],["It annoys me that they turn to me again.",{"M":2}],["I help so I seem indispensable.",{"T":2}],["I honestly say how much I can offer now.",{}]]},{"t":"You look in the mirror before an event. The dominant thought:","o":[["“I don’t look good enough, everyone will judge me.”",{"R":1,"F":1}],["“I must be the most impressive one in the room.”",{"T":2}],["“Others look better than me anyway.”",{"I":2}],["“I’m ok as I am”, and I leave at peace.",{}]]},{"t":"You made a mistake no one noticed. Inside:","o":[["It gnaws at me for hours, I replay it endlessly.",{"R":2}],["I’m afraid it will come out.",{"F":2}],["I hide it and pretend it didn’t happen.",{"T":1,"R":1}],["I admit it, fix it if I can, move on.",{}]]},{"t":"Someone gets the promotion you wanted. The first evening at home:","o":[["I brood over why I wasn’t chosen.",{"I":2}],["“The system is unfair, I deserved it.”",{"M":1,"T":1}],["I feel like a failure.",{"R":2}],["I note what I actually want, and how to get there.",{}]]},{"t":"You have unexpected free time, an hour just for you. You use it:","o":[["I get stuck on the phone without noticing it pass.",{"N":1,"P":1}],["Anxiety grabs me that I’m “wasting time”.",{"F":1,"M":1}],["I look for something to give me a hit of “more”.",{"P":2}],["I do something that truly nourishes me, present.",{}]]},{"t":"In a heated discussion, the other person is right. You:","o":[["I don’t admit it, I look for a counterargument.",{"T":2}],["I give in for fear of conflict.",{"F":2}],["I raise my voice so I don’t seem weak.",{"M":2}],["I simply admit: “You’re right.”",{}]]},{"t":"In the morning, the first thought before getting out of bed:","o":[["“Another hard day, can I handle it?”",{"F":2}],["“I don’t feel like anything.”",{"N":2}],["“What else do I need to be ok at last?”",{"P":1,"I":1}],["“What small good thing can I do today?”",{}]]},{"t":"Someone compliments you sincerely. The inner reaction:","o":[["I don’t believe them, “surely it’s just politeness”.",{"R":2}],["“Obviously, it was to be expected.”",{"T":2}],["I get flustered and change the subject out of embarrassment.",{"R":1,"F":1}],["I receive it: “Thank you, I’m glad.”",{}]]},{"t":"You have an unresolved conflict with someone dear. How do you carry it?","o":[["I avoid the person, hoping it passes on its own.",{"F":1,"N":1}],["I boil inside and rehearse what I’ll say.",{"M":2}],["I wait for them to make the first move — I’m right.",{"T":2}],["I open the conversation myself, calmly.",{}]]},{"t":"A goal you care about needs daily effort. After 4 days:","o":[["I’ve already stopped — “it’s not the right time”.",{"N":2}],["I scold myself harshly for each missed day.",{"M":1,"R":1}],["I want big results now, I get bored of the steps.",{"P":2}],["I continue with the small step, even imperfect.",{}]]},{"t":"You see someone doing exactly what you dreamed of doing. You feel:","o":[["“I could never pull that off.”",{"F":1,"R":1}],["A sharp envy, “why them?”.",{"I":2}],["“I would have done it better.”",{"T":2}],["Inspiration: “So it’s possible. I’ll start too.”",{}]]},{"t":"You’re alone in the evening, no plans. The feeling that arises:","o":[["An emptiness I urgently want to fill with something.",{"P":2}],["Unease, “something is wrong with me”.",{"R":1,"F":1}],["Numbness, I let time pass.",{"N":2}],["Peace — I keep myself company without fleeing.",{}]]},{"t":"Finally, honestly: which voice do you hear most often in you?","o":[["“Be careful, watch out, it might go wrong.”",{"F":2}],["“You’re not good enough.”",{"R":2}],["“You deserve more, don’t settle for this.”",{"P":1,"I":1}],["“You’re ok. Keep going, one step.”",{}]]}],"MICRO":{"F":["Name it: say in your mind “it is fear”, not “I am afraid”.","Three slow breaths, soles pressed to the floor.","Ask: “What value is fear trying to protect?”"],"R":["Write in one line what you hide — just for you.","Replace “I am wrong” with “I made a mistake”.","Tell someone you trust one small, true thing about yourself."],"M":["Before reacting, count to 6 while breathing.","State the boundary: “This is not ok for me.”","Ask: what powerlessness hides beneath the fire?"],"P":["Stop for 30 seconds and savor what you already have.","Ask: “What emptiness am I really trying to fill?”","Delay “one more” by 5 minutes and watch the wave pass."],"T":["Ask for help today with something small, though you can do it alone.","Acknowledge someone’s merit, sincerely.","Let it go once without having the last word."],"I":["Turn envy into a compass: “What does it show I want?”","Note one small step toward that thing.","Say three gratitudes for your own path."],"N":["Do just 2 minutes of the task — that’s all.","The smallest possible step, not the perfect plan.","Start a 5-minute timer and begin."]}}};
+window.I18N = {"Filozofia luminii":"The philosophy of light","Premisa de la care pornește tot ce urmează: ești, în esența ta, o sursă inepuizabilă de energie vitală. O lumină. O scânteie dintr-un foc mai mare. Nu o baterie care se descarcă, ci un izvor — ceva ce produce energie, nu doar o consumă.":"The premise everything starts from: you are, in essence, an inexhaustible source of vital energy. A light. A spark of a greater fire. Not a battery that drains, but a spring — something that produces energy, not just spends it.","„Nu ești o picătură în ocean. Ești întregul ocean, într-o picătură.\"":"“You are not a drop in the ocean. You are the entire ocean, in a drop.”","Dacă acest lucru e adevărat, apare imediat o întrebare stânjenitoare: de ce ne simțim atât de des goliți, obosiți, „secați\"? Răspunsul pe care îl explorează această carte: nu pentru că izvorul ar seca vreodată, ci pentru că energia se scurge prin canale de care nu suntem conștienți. Frica, rușinea, comparația, dependența, resentimentul, nevoia de aprobare — toate sunt „robinete\" deschise. În limbajul vechi al demonologiei, exact acestea erau numite demoni: forțe care se hrănesc din lumina ta fără ca tu să observi.":"If this is true, an uncomfortable question arises at once: why do we so often feel emptied, tired, “drained”? The answer this book explores: not because the spring ever runs dry, but because energy leaks through channels we’re not aware of. Fear, shame, comparison, addiction, resentment, the need for approval — all are open “taps”. In the old language of demonology, these were exactly what were called demons: forces that feed on your light without you noticing.","Cartea nu îți cere să crezi în ființe din altă lume. Îți cere ceva mai simplu și mai greu: să observi unde se scurge lumina ta — și să înveți să închizi robinetele.":"The book doesn’t ask you to believe in beings from another world. It asks something simpler and harder: to notice where your light leaks — and to learn to close the taps.","Trei principii fondatoare":"Three founding principles","Lumina nu poate fi luată, doar cedată. Nimeni nu îți fură energia vitală. O oferi — de obicei fără să știi, în schimbul unei iluzii de siguranță, apartenență sau control.":"Light cannot be taken, only given. No one steals your vital energy. You offer it — usually without knowing — in exchange for an illusion of safety, belonging or control.","Planul nevăzut este mintea. Ceea ce tradiția numea „lumea spiritelor\" se suprapune aproape perfect peste ceea ce psihologia numește azi inconștient, tipare, condiționări. „Nevăzut\" nu înseamnă inexistent — înseamnă sub pragul atenției.":"The unseen plane is the mind. What tradition called “the world of spirits” overlaps almost perfectly with what psychology today calls the unconscious, patterns, conditioning. “Unseen” doesn’t mean nonexistent — it means below the threshold of attention.","A numi înseamnă a stăpâni. Vechea intuiție magică — că a cunoaște numele unui demon îți dă putere asupra lui — este literalmente adevărată la nivel psihologic. O forță pe care o poți numi cu precizie încetează să te mai conducă orbește.":"To name is to master. The old magical intuition — that knowing a demon’s name gives you power over it — is literally true at the psychological level. A force you can name precisely stops leading you blindly.","Ce este planul nevăzut":"What the unseen plane is","Planul nevăzut este stratul de procese care îți modelează experiența fără să apară direct în conștiință. Impulsuri, reflexe emoționale, presupuneri despre lume, „voci\" interioare, automatisme. Nu îl vezi, dar te conduce — la fel cum nu vezi curentul unui râu, dar el hotărăște unde ajunge barca.":"The unseen plane is the layer of processes that shape your experience without appearing directly in consciousness. Impulses, emotional reflexes, assumptions about the world, inner “voices”, automatisms. You don’t see it, but it steers you — just as you don’t see a river’s current, yet it decides where the boat ends up.","De ce rămâne „nevăzut\"":"Why it stays “unseen”","Viteză. Reacțiile automate se produc în milisecunde, înainte ca gândul conștient să apuce să se formeze.":"Speed. Automatic reactions happen in milliseconds, before the conscious thought has time to form.","Vechime. Multe tipare s-au format în copilărie, într-un limbaj pre-verbal — de aceea nu pot fi „ținute minte\", doar simțite.":"Age. Many patterns formed in childhood, in a pre-verbal language — that’s why they can’t be “remembered”, only felt.","Utilitate aparentă. Fiecare tipar a fost, cândva, o soluție. De aceea mintea îl apără — îl confundă cu tine.":"Apparent usefulness. Every pattern was, once, a solution. That’s why the mind defends it — it mistakes it for you.","Cele trei straturi":"The three layers","1 · Stratul Reactiv":"1 · The Reactive layer","Reflexele emoționale imediate — frică, furie, poftă, rușine. Cel mai vechi și mai rapid. Aici „locuiesc\" majoritatea demonilor clasici.":"Immediate emotional reflexes — fear, anger, craving, shame. The oldest and fastest. This is where most classical demons “live”.","2 · Stratul Narativ":"2 · The Narrative layer","Poveștile pe care ți le spui despre cine ești, ce meriți, cum e lumea. Aici trăiesc credințele-limită și scenariile repetitive.":"The stories you tell yourself about who you are, what you deserve, how the world is. Here live the limiting beliefs and the repetitive scripts.","3 · Stratul Luminos":"3 · The Luminous layer","Sursa. Conștiința care poate observa primele două straturi fără să fie prinsă în ele. Ținta întregului parcurs.":"The source. The awareness that can observe the first two layers without being caught in them. The aim of the whole journey.","Întreaga „lucrare\" a cărții este mișcarea de la stratul 1 spre stratul 3: de la a fi reacția, la a avea reacția, la a observa reacția.":"The entire “work” of the book is the movement from layer 1 toward layer 3: from being the reaction, to having the reaction, to observing the reaction.","Demonologia ca hartă a forțelor":"Demonology as a map of forces","Timp de milenii, culturi complet diferite — mesopotamiene, ebraice, creștine, egiptene, indiene — au construit taxonomii detaliate ale „spiritelor\" care influențează omul. E tentant să le respingem ca superstiție. Dar oamenii aceia observau, de fapt, ceva foarte real: tiparele recurente ale suferinței umane. Nu aveau vocabularul psihologiei, așa că le-au dat chipuri, nume și ierarhii.":"For millennia, entirely different cultures — Mesopotamian, Hebrew, Christian, Egyptian, Indian — built detailed taxonomies of the “spirits” that influence a person. It’s tempting to dismiss them as superstition. But those people were actually observing something very real: the recurring patterns of human suffering. They didn’t have the vocabulary of psychology, so they gave them faces, names and hierarchies.","Un demon medieval al lăcomiei și un studiu modern despre mecanismele dependenței descriu, în fond, același fenomen — o forță care cere din ce în ce mai mult și dă din ce în ce mai puțin. Cartea folosește ambele limbaje: cel mitic pentru forța lui evocatoare, cel psihologic pentru precizie și utilitate.":"A medieval demon of greed and a modern study on the mechanisms of addiction describe, at bottom, the same phenomenon — a force that asks for more and more and gives less and less. The book uses both languages: the mythical one for its evocative power, the psychological one for precision and usefulness.","Tradițiile pe scurt":"The traditions in brief","Demonologia mesopotamiană. Lamashtu, Pazuzu — spiritele bolii și ale vântului, primele încercări de a numi ceea ce apasă mintea.":"Mesopotamian demonology. Lamashtu, Pazuzu — the spirits of illness and wind, the first attempts to name what weighs on the mind.","Tradiția ebraică și creștină. Cele șapte păcate capitale ca sistem timpuriu de „psihologie a viciului\".":"The Hebrew and Christian tradition. The seven deadly sins as an early system of “the psychology of vice”.","Goetia și grimoarele renascentiste. Cei 72 de „spirite\" din Ars Goetia, citiți ca un catalog de facultăți și obsesii ale minții.":"Goetia and Renaissance grimoires. The 72 “spirits” of the Ars Goetia, read as a catalogue of the mind’s faculties and obsessions.","Perspectiva comparată. Aceleași tipare apar sub nume diferite în culturi care nu au comunicat niciodată — semn că descriu ceva universal-uman.":"The comparative view. The same patterns appear under different names in cultures that never communicated — a sign that they describe something universally human.","A numi o forță cu precizie e primul act de putere asupra ei. Restul cărții îți dă numele.":"To name a force precisely is the first act of power over it. The rest of the book gives you the names.","Anatomia unei scurgeri de energie":"The anatomy of an energy leak","Fiecare Străjer operează prin același ciclu în patru pași. A-l vedea înseamnă a-l putea întrerupe.":"Every Guardian operates through the same four-step cycle. To see it is to be able to interrupt it.","1 · Declanșatorul. Un eveniment mic — o privire, un mesaj, un gând.":"1 · The trigger. A small event — a look, a message, a thought.","2 · Reacția automată. Străjerul se activează (stratul Reactiv).":"2 · The automatic reaction. The Guardian activates (the Reactive layer).","3 · Povestea. Mintea justifică reacția (stratul Narativ): „vezi, iar am eșuat\".":"3 · The story. The mind justifies the reaction (the Narrative layer): “see, I failed again”.","4 · Scurgerea. Energie cheltuită pe frică, ruminație și apărare, în loc de acțiune.":"4 · The leak. Energy spent on fear, rumination and defense, instead of action.","Punctul de întrerupere":"The point of interruption","Singurul loc unde poți interveni este între pasul 2 și 3 — clipa dinaintea poveștii. Tradiția o numea „veghe\". Psihologia o numește defuziune. Practica e aceeași: observi reacția fără să te contopești cu ea. „E frică\" în loc de „mi-e frică\". O silabă diferență — o lume diferență.":"The only place you can intervene is between step 2 and 3 — the instant before the story. Tradition called it “vigil”. Psychology calls it defusion. The practice is the same: you observe the reaction without merging with it. “It is fear” instead of “I am afraid”. One syllable of difference — a world of difference.","Persuasiunea și apărarea minții":"Persuasion and defending the mind","Marketingul modern este știința aplicată a influențării planului nevăzut. Un mesaj de vânzare bine făcut nu convinge stratul rațional — el se adresează direct Străjerilor. Frica („ratezi oferta\"), invidia („uite ce au alții\"), trufia („tu meriți exclusivitatea\"), pofta („mai mult, acum\"). Aceleași șapte forțe pe care le-am cartografiat.":"Modern marketing is the applied science of influencing the unseen plane. A well-made sales message doesn’t convince the rational layer — it speaks directly to the Guardians. Fear (“you’ll miss the offer”), envy (“look what others have”), pride (“you deserve exclusivity”), craving (“more, now”). The same seven forces we mapped.","De aceea această parte are dublu rol: să explice cum funcționează persuasiunea și, mai important, să te învețe cum să-ți aperi lumina de persuasiunea care te golește. Cunoașterea mecanismului este scut.":"That’s why this part has a double role: to explain how persuasion works and, more importantly, to teach you how to defend your light from the persuasion that empties you. Knowing the mechanism is a shield.","Cele șase pârghii ale influenței":"The six levers of influence","Primești ceva „gratis\", te simți dator.":"Reciprocity. You get something “free”, you feel indebted.","Un mic „da\" te obligă la unul mare, ca să rămâi coerent.":"Consistency. A small “yes” commits you to a big one, to stay coherent.","„Toți fac asta\" — frica de a fi exclus.":"Social proof. “Everyone does this” — the fear of being excluded.","Un simbol de expertiză dezarmează gândirea critică.":"Authority. A symbol of expertise disarms critical thinking.","Cumperi de la cine îți place.":"Liking. You buy from those you like.","„Ultimele locuri\", „doar azi\" — frica de pierdere.":"Scarcity. “Last spots”, “today only” — the fear of loss.","Persuasiunea etică aprinde lumina celuilalt. Manipularea o consumă. Aceeași tehnică — intenții opuse.":"Ethical persuasion lights up the other’s light. Manipulation consumes it. The same technique — opposite intentions.","Scutul: cele trei întrebări":"The shield: the three questions","Trei întrebări care neutralizează aproape orice manipulare, oprind reacția înainte de povestea din pasul 3.":"Three questions that neutralize almost any manipulation, stopping the reaction before the story in step 3.","„Ce simt chiar acum?\" — identifică Străjerul activat.":"“What do I feel right now?” — identifies the activated Guardian.","„Cine câștigă dacă acționez din emoția asta?\" — dezvăluie mecanismul.":"“Who wins if I act from this emotion?” — reveals the mechanism.","„Ce aș face dacă aș avea tot timpul din lume?\" — dezarmează raritatea și frica.":"“What would I do if I had all the time in the world?” — disarms scarcity and fear.","Practici pentru a păstra lumina":"Practices to keep the light","Cunoașterea fără practică rămâne decor. Iată micro-exercițiile care lucrează exact în „punctul de întrerupere\".":"Knowledge without practice stays decor. Here are the micro-exercises that work exactly at the “point of interruption”.","Numirea (10 secunde). Când simți o reacție, spune în gând: „E frică\" / „E invidie\". Trece de la a fi emoția la a o observa.":"Naming (10 seconds). When you feel a reaction, say in your mind: “it is fear” / “it is envy”. Move from being the emotion to observing it.","Trei respirații. Înainte de orice reacție importantă, trei respirații lente. Creezi spațiul dintre pasul 2 și 3.":"Three breaths. Before any important reaction, three slow breaths. You create the space between step 2 and 3.","Fraza de veghe. O propoziție scurtă, personală, pe care o repeți când Străjerul dominant se activează. (Jocul îți dă una la final.)":"The vigil phrase. A short, personal sentence you repeat when the dominant Guardian activates. (The game gives you one at the end.)","Scanarea de seară. Un minut înainte de culcare: „Unde s-a scurs lumina azi?\" Fără judecată — doar observație.":"The evening scan. One minute before sleep: “Where did my light leak today?” No judgment — only observation.","Pasul mic. Împotriva Ceței: cea mai mică acțiune posibilă acum, nu planul perfect de mâine.":"The small step. Against the Fog: the smallest possible action now, not the perfect plan for tomorrow.","Frica":"Fear","Paznicul":"The Watchman","Rușinea":"Shame","Vălul":"The Veil","Mânia":"Anger","Focul":"The Fire","Pofta":"Craving","Golul":"The Void","Trufia":"Pride","Masca":"The Mask","Invidia":"Envy","Oglinda":"The Mirror","Inerția":"Inertia","Ceața":"The Fog","Manifest":"Manifesto","Planul nevăzut":"The unseen plane","Demonologie":"Demonology","Străjerii":"The Guardians","Persuasiune":"Persuasion","Jocul":"The Game","Practici":"Practices","Scurgerea":"The Leak","Cei 7 Străjeri":"The 7 Guardians","Cartea":"The Book","Practica":"Practice","Înapoi sus ↑":"Back to top ↑","Ghid elementar pentru planul nevăzut":"An elementary guide to the unseen plane","O carte despre energia ta vitală":"A book about your vital energy","coboară în lumină ↓":"descend into the light ↓","Partea 0 — Manifest":"Part 0 — Manifesto","Partea I":"Part I","Partea II":"Part II","Partea III":"Part III","Partea IV":"Part IV","Partea V":"Part V","Partea VI — Jocul":"Part VI — The Game","Partea VII":"Part VII","Cei 7 Străjeri ai scurgerii":"The 7 Guardians of the leak","Harta Străjerilor tăi":"The map of your Guardians","Condensăm întreaga tradiție în șapte forțe interioare. Fiecare nu este un „inamic\" de învins, ci un mesager deghizat: frica păzește o valoare, mânia semnalează o limită, pofta arată un gol real. Munca nu e să-i alungi, ci să le asculți mesajul și să nu-i mai lași să conducă.":"We condense the entire tradition into seven inner forces. Each is not an \"enemy\" to defeat, but a disguised messenger: fear guards a value, anger signals a boundary, craving points to a real emptiness. The work is not to banish them, but to hear their message and stop letting them lead.","Anticiparea pericolului. Îți proiectează în minte catastrofe care rareori se întâmplă, ca să te țină „în siguranță\" prin imobilitate.":"The anticipation of danger. It projects into your mind catastrophes that rarely happen, to keep you \"safe\" through immobility.","Șoapta „sunt defect\". Nu spune că ai greșit, ci că ești greșit. Trăiește din secret și comparație.":"The whisper \"I am defective\". It doesn’t say you made a mistake, but that you are a mistake. It lives on secrecy and comparison.","Reacția la o limită încălcată. Utilă ca semnal, distructivă ca stăpân. Sub ea stă adesea neputința.":"The reaction to a crossed boundary. Useful as a signal, destructive as a master. Beneath it often lies powerlessness.","Nevoia de „mai mult\" care nu se satură niciodată. Cere umplere din afară pentru un gol care e, de fapt, interior.":"The need for \"more\" that is never satisfied. It demands filling from outside for an emptiness that is, in fact, inner.","„Trebuie să fiu superior.\" O armură strălucitoare peste frica de a fi irelevant. Cu cât mai groasă masca, cu atât mai fragil dedesubt.":"\"I must be superior.\" A shining armor over the fear of being irrelevant. The thicker the mask, the more fragile beneath.","„Al altuia e mai bun.\" Îți fură atenția de la drumul propriu și o lipește de al altcuiva, măsurându-te veșnic.":"\"Someone else’s is better.\" It steals your attention from your own path and glues it to another’s, measuring you endlessly.","Amânarea, amorțeala, „mâine\". Te protejează de eșec ținându-te nemișcat — dar nemișcarea e o formă lentă de scurgere.":"Postponement, numbness, \"tomorrow\". It protects you from failure by keeping you still — but stillness is a slow leak.","se hrănește din: nesiguranță":"feeds on: insecurity","antidot: prezența":"antidote: presence","se hrănește din: comparație":"feeds on: comparison","antidot: acceptarea":"antidote: acceptance","se hrănește din: nedreptate":"feeds on: injustice","antidot: limita clară":"antidote: the clear boundary","se hrănește din: vid, plictis":"feeds on: emptiness, boredom","antidot: suficiența":"antidote: enoughness","se hrănește din: frica de irelevanță":"feeds on: fear of irrelevance","antidot: apartenența":"antidote: belonging","se hrănește din: lipsă de sens":"feeds on: lack of meaning","antidot: recunoștința":"antidote: gratitude","se hrănește din: frica de eșec":"feeds on: fear of failure","antidot: pasul mic":"antidote: the small step","Reciprocitatea":"Reciprocity","Consecvența":"Consistency","Dovada socială":"Social proof","Autoritatea":"Authority","Simpatia":"Liking","Raritatea":"Scarcity","exploatează: obligația":"exploits: obligation","exploatează: Masca":"exploits: the Mask","exploatează: Oglinda":"exploits: the Mirror","exploatează: Paznicul":"exploits: the Watchman","exploatează: apartenența":"exploits: belonging","exploatează: Golul":"exploits: the Void","Un chestionar care, prin răspunsurile tale, desenează structura ta mentală: care dintre cei 7 Străjeri îți consumă cel mai mult lumina și pe unde se scurge energia. Nu o etichetă — o hartă cu antidoturi. Fără răspunsuri greșite. Bara de energie de mai jos „se scurge\" spre Străjerul tău dominant pe măsură ce răspunzi.":"A questionnaire that, through your answers, draws your mental structure: which of the 7 Guardians drains most of your light and where the energy leaks. Not a label — a map with antidotes. No wrong answers. The energy bar below \"leaks\" toward your dominant Guardian as you answer.","„Ești o sursă inepuizabilă. Rămâne doar să nu mai cedezi lumina fără să știi.\"":"\"You are an inexhaustible source. All that remains is to stop giving your light away without knowing.\""};
+window.SITE_LANG = (function(){try{return localStorage.getItem('lumina_lang')||'ro';}catch(e){return 'ro';}})();
+
+(function(){
+  /* buton limbă în meniu + stil */
+  var nav=document.getElementById('siteNav');
+  var st=document.createElement('style');
+  st.textContent='.sn-lang{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.06em;border:1px solid var(--gold-deep);color:var(--gold-deep);background:transparent;border-radius:999px;padding:6px 12px;cursor:pointer;margin-left:14px;transition:.2s}.sn-lang:hover{background:var(--gold);color:#fff;border-color:var(--gold)}@media(max-width:820px){.sn-lang{margin-left:auto;margin-right:10px}}';
+  document.head.appendChild(st);
+  var btn=document.createElement('button');btn.className='sn-lang';btn.id='siteLang';
+  var burger=document.getElementById('snBurger');
+  nav.insertBefore(btn, burger);
+
+  var SEL='.sn-links a, #cover .sub, #cover .meta, .scroll-hint, .kicker, h2, h3, p, li, blockquote, .role, .tag, .lever h4, .lever small, .sf-tag, .sf-col h4, .sf-col a, .sf-bottom a, .sf-quote';
+  window.__MISSING=[];
+  function norm(s){return (s||'').replace(/\s+/g,' ').trim();}
+  function translateStatic(lang){
+    var els=document.querySelectorAll(SEL);
+    els.forEach(function(el){
+      if(el.closest('#quiz-wrap'))return;
+      if(el.dataset.roHtml===undefined){el.dataset.roHtml=el.innerHTML;el.dataset.ro=norm(el.textContent);}
+      var ro=el.dataset.ro;
+      if(lang==='en'){
+        var en=window.I18N[ro];
+        if(en!==undefined){el.textContent=en;}
+        else{ if(/[A-Za-zĂÂÎȘȚăâîșț]/.test(ro)) window.__MISSING.push(ro); }
+      } else {
+        el.innerHTML=el.dataset.roHtml;
+      }
+    });
+  }
+  function setLang(lang){
+    window.SITE_LANG=lang;
+    try{localStorage.setItem('lumina_lang',lang);}catch(e){}
+    document.documentElement.setAttribute('lang',lang);
+    btn.textContent = lang==='ro' ? 'EN' : 'RO';
+    translateStatic(lang);
+    if(window.__gameSetLang)window.__gameSetLang();
+  }
+  btn.onclick=function(){setLang(window.SITE_LANG==='ro'?'en':'ro');};
+  window.__setSiteLang=setLang;
+  // init
+  setLang(window.SITE_LANG);
+})();
+
+/* ============ JOCUL bilingv: chestionar + Operator ============ */
+(function(){
+  var ORDER=['F','R','M','P','T','I','N'];
+  var axes=ORDER, qi=0, score={}, hist=[], lastDom=null, opBooted=false, opTurns=0, opClosed=false;
+  var G,Q,MICRO;
+  function DB(){return window.LUMINA_DB[window.SITE_LANG];}
+  function bind(){var d=DB();G=d.G;Q=d.Q;MICRO=d.MICRO;}
+  bind();
+  function L(ro,en){return window.SITE_LANG==='ro'?ro:en;}
+  function $(id){return document.getElementById(id);}
+  function elmt(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+  function reset(){score={};axes.forEach(function(a){score[a]=0;});}
+  function sorted(){return axes.slice().sort(function(a,b){return score[b]-score[a];});}
+  function dominant(){var b=axes[0],v=-1;axes.forEach(function(a){if(score[a]>v){v=score[a];b=a;}});return v>0?b:null;}
+  function norm2(s){return (s||'').toLowerCase().replace(/ă/g,'a').replace(/â/g,'a').replace(/î/g,'i').replace(/ș|ş/g,'s').replace(/ț|ţ/g,'t');}
+
+  function labels(){
+    $('backBtn').textContent=L('← Înapoi','← Back');
+    $('restartBtn').textContent=L('Reia harta ↺','Restart the map ↺');
+    $('opSend').textContent=L('Trimite','Send');
+    $('opText').setAttribute('placeholder',L('Scrie ce simți sau o situație…','Write what you feel or a situation…'));
+    var rr=document.querySelector('#result .res-role');if(rr)rr.textContent=L('Structura ta mentală','Your mental structure');
+    var b=document.querySelectorAll('#result .res-block b');
+    if(b[0])b[0].textContent=L('Mesajul deghizat.','The disguised message.');
+    if(b[1])b[1].textContent=L('Cum îl recunoști.','How to recognize it.');
+    if(b[2])b[2].textContent=L('Antidotul tău.','Your antidote.');
+  }
+  function renderQ(){var q=Q[qi];$('qCount').textContent=L('Întrebarea ','Question ')+(qi+1)+L(' din ',' of ')+Q.length;$('qText').textContent=q.t;var box=$('qOpts');box.innerHTML='';q.o.forEach(function(opt){var b=elmt('button','opt',null);b.textContent=opt[0];b.onclick=function(){choose(opt[1]);};box.appendChild(b);});$('backBtn').disabled=qi===0;var d=dominant();$('domHint').textContent=d?L('se conturează: ','emerging: ')+G[d].role:'';$('energyBar').style.width=Math.max(6,100-hist.length/Q.length*88)+'%';}
+  function choose(delta){hist.push({qi:qi,delta:delta});for(var k in delta){score[k]=(score[k]||0)+delta[k];}qi++;if(qi>=Q.length)finish();else renderQ();}
+  function fillResult(d){var g=G[d];labels();$('resName').textContent=g.name;$('resRole').textContent=L('Străjerul dominant · ','Dominant Guardian · ')+g.role;$('resMsg').textContent=g.msg;$('resSign').textContent=g.sign;$('resAnti').textContent=g.anti;$('resMantra').textContent='„'+g.mantra+'"';drawRadar();}
+  function finish(){$('quiz').style.display='none';$('result').classList.add('show');lastDom=dominant()||axes[0];fillResult(lastDom);bootOp();$('result').scrollIntoView({behavior:'smooth',block:'start'});}
+
+  function drawRadar(){var cv=$('radar');if(!cv||!cv.getContext)return;var cx=cv.getContext('2d');var W=cv.width,H=cv.height,ox=W/2,oy=H/2+6,R=125;cx.clearRect(0,0,W,H);var labs={};axes.forEach(function(a){labs[a]=G[a].name;});var max=Math.max(1,axes.map(function(a){return score[a]||0;}).reduce(function(x,y){return Math.max(x,y);},0));var n=axes.length;for(var g=1;g<=4;g++){cx.beginPath();for(var k=0;k<=n;k++){var ang=-Math.PI/2+k/n*2*Math.PI,rr=R*g/4,px=ox+Math.cos(ang)*rr,py=oy+Math.sin(ang)*rr;k===0?cx.moveTo(px,py):cx.lineTo(px,py);}cx.strokeStyle='rgba(43,42,38,.10)';cx.stroke();}axes.forEach(function(a,k){var ang=-Math.PI/2+k/n*2*Math.PI;cx.beginPath();cx.moveTo(ox,oy);cx.lineTo(ox+Math.cos(ang)*R,oy+Math.sin(ang)*R);cx.strokeStyle='rgba(43,42,38,.10)';cx.stroke();var lx=ox+Math.cos(ang)*(R+22),ly=oy+Math.sin(ang)*(R+16);cx.fillStyle='#6a655a';cx.font='600 12px Manrope,sans-serif';cx.textAlign='center';cx.textBaseline='middle';cx.fillText(labs[a],lx,ly);});cx.beginPath();axes.forEach(function(a,k){var ang=-Math.PI/2+k/n*2*Math.PI,rr=R*((score[a]||0)/max),px=ox+Math.cos(ang)*rr,py=oy+Math.sin(ang)*rr;k===0?cx.moveTo(px,py):cx.lineTo(px,py);});cx.closePath();var grad=cx.createRadialGradient(ox,oy,10,ox,oy,R);grad.addColorStop(0,'rgba(199,154,62,.55)');grad.addColorStop(1,'rgba(199,154,62,.15)');cx.fillStyle=grad;cx.fill();cx.strokeStyle='#a97f27';cx.lineWidth=2;cx.stroke();axes.forEach(function(a,k){var ang=-Math.PI/2+k/n*2*Math.PI,rr=R*((score[a]||0)/max),px=ox+Math.cos(ang)*rr,py=oy+Math.sin(ang)*rr;cx.beginPath();cx.arc(px,py,3.5,0,7);cx.fillStyle='#a97f27';cx.fill();});}
+
+  /* ---- Operator ---- */
+  var KW={F:['team','fric','anxi','pani','grij','stres','nu pot','si daca','frica','afraid','fear','scared','anxious','worry','panic','what if'],
+   R:['vin','jen','rusin','prost','defect','nu merit','esec','rusine','shame','guilt','ashamed','worthless','embarrass'],
+   M:['nerv','furi','enerv','nedrept','manie','frustr','iritat','anger','angry','furious','rage','unfair','mad'],
+   P:['vreau','mai mult','poft','depend','plictis','gol','crave','more','addict','bored','emptiness','urge'],
+   T:['perfect','cel mai bun','dreptate','superior','masca','orgoli','mandr','pride','best','right','mask','ego','arrogant'],
+   I:['invidi','gelo','altii','compar','gelozie','envy','jealous','others','compare','better than me'],
+   N:['aman','lene','blocat','oboseal','obosit','maine','procrast','nu am chef','postpone','lazy','stuck','tired','tomorrow','numb']};
+  function matchText(t){var n=norm2(t);for(var i=0;i<axes.length;i++){var a=axes[i];for(var j=0;j<KW[a].length;j++){if(n.indexOf(KW[a][j])>=0)return a;}}return null;}
+  function opSorted(){return axes.slice().sort(function(a,b){return score[b]-score[a];});}
+  function meSay(t){var b=elmt('div','bubble me',null);b.textContent=t;$('opLog').appendChild(b);sc();}
+  function sc(){var l=$('opLog');l.scrollTop=l.scrollHeight;}
+  function opSay(html,delay){return new Promise(function(res){var d=elmt('div','typing','<span></span><span></span><span></span>');$('opLog').appendChild(d);sc();setTimeout(function(){d.remove();var b=elmt('div','bubble op',html);$('opLog').appendChild(b);sc();res();},delay||Math.min(1300,650+html.length*11));});}
+  function chips(list){var q=$('opQuick');q.innerHTML='';list.forEach(function(c){var b=elmt('button','chip',null);b.textContent=c.label;b.onclick=function(){q.innerHTML='';meSay(c.label);c.act();};q.appendChild(b);});}
+  function askOp(text){var a=matchText(text);if(a){var g=G[a];return L('Aud în ce spui <b>'+g.role+'</b> — '+g.name.toLowerCase()+'. '+g.anti+'<br><br>Ia-o ca întrebare: ce s-ar schimba dacă ai observa reacția cu o clipă înainte s-o crezi?','I hear <b>'+g.role+'</b> in what you say — '+g.name.toLowerCase()+'. '+g.anti+'<br><br>Take it as a question: what would change if you noticed the reaction a moment before believing it?');}var gen=L(['Rămân cu tine în asta. Unde simți în corp ce descrii — piept, stomac, umeri?','Dacă ai privi situația doar observând-o, ce ai vedea diferit?','Care dintre Străjerii tăi crezi că vorbește aici prin tine?'],['I stay with you in this. Where do you feel it in the body — chest, stomach, shoulders?','If you looked at the situation just observing it, what would you see differently?','Which of your Guardians do you think speaks through you here?']);return gen[opTurns%gen.length];}
+  function menu(){var s=opSorted();return [{label:L('De ce ','Why ')+G[s[0]].role+'?',act:opWhy},{label:L('Unde se scurge lumina?','Where does the light leak?'),act:opWhere},{label:L('Ce fac azi?','What do I do today?'),act:opNow},{label:L('Lasă-mi o cale de veghe','Leave me a vigil path'),act:opClose}];}
+  function opWhy(){var g=G[opSorted()[0]];opSay(L('<b>'+g.role+'</b> conduce cel mai des în tine. '+g.msg+' Semnul: '+g.sign.toLowerCase(),'<b>'+g.role+'</b> leads most often in you. '+g.msg+' The sign: '+g.sign.toLowerCase())).then(function(){chips(menu());});}
+  function opWhere(){var s=opSorted().slice(0,3);opSay(L('Lumina ta se scurge pe trei căi. Pe care o privim?','Your light leaks along three paths. Which one shall we look at?')).then(function(){chips(s.map(function(a){return {label:G[a].role+' · '+G[a].name,act:function(){opLeak(a);}};}));});}
+  function opLeak(a){var g=G[a];opSay('<b>'+g.name+'</b> ('+g.role+'). '+g.msg+'<br><br>'+L('Antidot: ','Antidote: ')+g.anti).then(function(){chips([{label:L('O practică mică','A small practice'),act:function(){opPractice(a);}}].concat(menu()));});}
+  function opNow(){opPractice(opSorted()[0]);}
+  function opPractice(a){var m=MICRO[a];opSay(L('Pentru <b>'+G[a].role+'</b>, alege unul — nu toate:','For <b>'+G[a].role+'</b>, choose one — not all:')+'<br>• '+m[0]+'<br>• '+m[1]+'<br>• '+m[2]).then(function(){if(opTurns>=2)opClose();else chips(menu());});}
+  function opClose(){if(opClosed)return;opClosed=true;$('opQuick').innerHTML='';var g=G[opSorted()[0]];opSay(L('Ia asta cu tine — calea ta de veghe pentru azi:','Take this with you — your vigil path for today:')).then(function(){return opSay(L('Când simți <b>'+g.role+'</b> ridicându-se, spune-ți:<br><i>„'+g.mantra+'"</i><br><br>Nu ca să alungi Străjerul — ci ca să nu-l mai lași să conducă. Lumina n-a plecat nicăieri.','When you feel <b>'+g.role+'</b> rising, tell yourself:<br><i>“'+g.mantra+'”</i><br><br>Not to banish the Guardian — but to stop letting it lead. The light hasn’t gone anywhere.'));}).then(function(){chips([{label:L('Mulțumesc','Thank you'),act:function(){opSay(L('Mergi în lumină. Sunt aici oricând reiei harta. ✧','Go in light. I’m here whenever you redraw your map. ✧'));}}]);});}
+  function handleFree(text){if(!text||!text.trim())return;meSay(text);opTurns++;opSay(askOp(text)).then(function(){if(opTurns>=3&&!opClosed)opClose();else chips(menu());});}
+  function bootOp(){opBooted=true;$('opLog').innerHTML='';$('opQuick').innerHTML='';opTurns=0;opClosed=false;var s=opSorted(),total=axes.reduce(function(x,a){return x+(score[a]||0);},0);var first;if((score[s[0]]||0)<=1){first=opSay(L('Ți-am citit harta și e neobișnuit de senină. Ai ales des observația în locul reacției.','I’ve read your map and it’s unusually serene. You often chose observation over reaction.'));}else{var p=Math.round((score[s[0]]||0)/(total||1)*100);first=opSay(L('Ți-am citit harta. Lumina ta se scurge cel mai mult prin <b>'+G[s[0]].role+'</b> — '+G[s[0]].name.toLowerCase()+' ('+p+'%) — și, secundar, prin <b>'+G[s[1]].role+'</b>.','I’ve read your map. Your light leaks most through <b>'+G[s[0]].role+'</b> — '+G[s[0]].name.toLowerCase()+' ('+p+'%) — and, secondarily, through <b>'+G[s[1]].role+'</b>.'));}first.then(function(){return opSay(L('Cu ce începem? Alege mai jos sau scrie-mi direct ce simți.','Where shall we begin? Choose below or write to me directly what you feel.'));}).then(function(){chips(menu());});}
+
+  $('opSend').onclick=function(){var v=$('opText').value;$('opText').value='';handleFree(v);};
+  $('opText').addEventListener('keydown',function(e){if(e.key==='Enter')$('opSend').onclick();});
+  $('restartBtn').onclick=function(){qi=0;reset();hist=[];$('result').classList.remove('show');$('quiz').style.display='block';labels();renderQ();$('joc').scrollIntoView({behavior:'smooth'});};
+
+  window.__gameSetLang=function(){bind();labels();if($('result').classList.contains('show')){fillResult(lastDom||dominant()||axes[0]);if(opBooted)bootOp();}else{renderQ();}};
+
+  labels();reset();renderQ();
+})();
+
+</script>
+</body>
+</html>
